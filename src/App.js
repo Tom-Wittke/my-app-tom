@@ -3,9 +3,10 @@ import "./App.css";
 import React, { useState } from "react";
 
 /** Regex */
+/** Firstname's and lastname's regex */
 const regexNames = new RegExp("^[A-Za-zÀ-ÖØ-öø-ÿ\\- ]+$");
+/** Email's regex */
 const regexEmail = new RegExp("^[a-zA-Z\\.\\-]+@[a-zA-Z]+\\.[a-z]{2,4}$");
-const regexZipCode = new RegExp("^[0-9]{5}$");
 
 /**
  * @param {string} date the birth date
@@ -79,11 +80,14 @@ const isValidZipCode = (zipCode) => {
 };
 
 function App() {
-  /** Snackbar */
+  /** Snackbar message */
   const [message, setMessage] = useState("Les champs ne sont pas valides.");
+  /** Snackbar is open */
   const [open, setOpen] = useState(false);
+  /** Form is submitted  */
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  /** User's input data */
   const [userData, setUserData] = useState({
     firstname: "",
     lastname: "",
@@ -93,6 +97,7 @@ function App() {
     zipCode: "",
   });
 
+  /** User error's input data */
   const [userDataErrors, setUserDataErrors] = useState({
     firstname: "",
     lastname: "",
@@ -102,6 +107,12 @@ function App() {
     zipCode: "",
   });
 
+  /**
+   * Set userDataErrors #fieldName error if #value is invalid
+   *
+   * @param {string} fieldName the field name
+   * @param {string} value the field value
+   */
   const validateField = (fieldName, value) => {
     switch (fieldName) {
       case "firstname":
@@ -142,28 +153,59 @@ function App() {
     }
   };
 
+  /**
+   * Update userData and userDataErrors
+   *
+   * @param {string} fieldName the field name
+   * @param {string} value the field value
+   *
+   * @see validateField
+   */
   const setField = (fieldName, value) => {
     setUserData({ ...userData, [fieldName]: value });
     validateField(fieldName, value);
   };
 
+  /**
+   * Submit and display success snackbar if form is valid
+   */
   const submit = () => {
     if (isValid(userDataErrors)) {
       window.localStorage.setItem("user", JSON.stringify(userData));
       setMessage("Utilisateur enregistré avec succès !");
       setOpen(true);
       clean();
+      setIsSubmitted(false);
     } else {
       setIsSubmitted(true);
       setOpen(true);
     }
   };
 
+  /** Close the snackbar */
   const handleClose = () => {
     setOpen(false);
   };
 
-  const clean = () => {};
+  /** Clean form after succesfull submit */
+  const clean = () => {
+    setUserData({
+      firstname: "",
+      lastname: "",
+      birthDate: "",
+      city: "",
+      email: "",
+      zipCode: "",
+    });
+    setUserDataErrors({
+      firstname: "",
+      lastname: "",
+      email: "",
+      birthDate: "",
+      city: "",
+      zipCode: "",
+    });
+  };
 
   return (
     <>
@@ -294,5 +336,4 @@ export {
   isValidZipCode,
   regexEmail,
   regexNames,
-  regexZipCode,
 };

@@ -93,6 +93,9 @@ describe("isValid function", () => {
   });
 });
 
+/**
+ * @function isValidZipCode
+ */
 describe("isValidZipCode function", () => {
   it("should return 'Le code postal ne doit pas contenir de lettre.' string error", () => {
     const zipCode = "abc";
@@ -118,6 +121,9 @@ describe("isValidZipCode function", () => {
   });
 });
 
+/**
+ * Test regex
+ */
 describe("Regex validations", () => {
   it("should return true when firstname respect regex", () => {
     const b = regexNames.test("Tom");
