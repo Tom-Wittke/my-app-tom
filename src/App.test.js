@@ -84,7 +84,7 @@ test("check if button is enable when all inputs are not empty", () => {
   expect(btnRegister).toBeEnabled();
 });
 
-test("check if user is saved in local storage when valid form", () => {
+test("check if user is saved in local storage when valid form is submitted", () => {
   const btnRegister = screen.getByTestId("register");
   fireEvent.click(btnRegister);
 
@@ -93,7 +93,7 @@ test("check if user is saved in local storage when valid form", () => {
   );
 });
 
-test("check if user is not saved in local storage when invalid form", () => {
+test("check if user is not saved in local storage when invalid form is submitted", () => {
   fireEvent.change(screen.getByLabelText("Prénom"), {
     target: { value: "Tom," },
   });
@@ -104,7 +104,7 @@ test("check if user is not saved in local storage when invalid form", () => {
   expect(window.localStorage.getItem("user")).toBeNull();
 });
 
-test("check snackbar display with success message when valid form", () => {
+test("check snackbar display with success message when valid form is submitted", () => {
   const btnRegister = screen.getByTestId("register");
   fireEvent.click(btnRegister);
 
@@ -113,7 +113,14 @@ test("check snackbar display with success message when valid form", () => {
   expect(snackbar).toHaveTextContent("Utilisateur enregistré avec succès !");
 });
 
-test("check snackbar is display with error message when invalid form", () => {
+test("check if form is cleaned when valid form is submitted", () => {
+  const btnRegister = screen.getByTestId("register");
+  fireEvent.click(btnRegister);
+
+  expect(btnRegister).toBeDisabled();
+});
+
+test("check snackbar is display with error message when invalid form  is submitted", () => {
   fireEvent.change(screen.getByLabelText("Prénom"), {
     target: { value: "Tom," },
   });
