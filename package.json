@@ -39,6 +39,7 @@
     ]
   },
   "devDependencies": {
+    "jsdoc": "^4.0.2",
     "react-test-renderer": "^18.2.0"
   }
 }
