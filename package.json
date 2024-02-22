@@ -1,6 +1,6 @@
 {
   "name": "my-app",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "homepage": "https://tom-wittke.github.io/my-app-tom/",
   "dependencies": {
