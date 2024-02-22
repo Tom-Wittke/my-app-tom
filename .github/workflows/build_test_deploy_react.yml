@@ -46,8 +46,9 @@ jobs:
           path: build
           if-no-files-found: error
       - name: Update build version
-        run: git tag v0.1.0-${{github.run_id}}${{github.run_number}}${{github.run_attempt}}-a -m "build number ${{github.run_number}}" 
-
+        run: |
+          git tag v0.1.0-${{github.run_id}}${{github.run_number}}${{github.run_attempt}}-a -m "build number ${{github.run_number}}" 
+          npm version from-git
   # Deploy job
   deploy:
     # Deploy to the github-pages environment
