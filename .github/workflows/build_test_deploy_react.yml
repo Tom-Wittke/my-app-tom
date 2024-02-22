@@ -46,7 +46,7 @@ jobs:
           path: build
           if-no-files-found: error
       - name: Update build version
-        run: git tag v0.1.0-$${{github.run_id}}$${{github.run_number}}$${{github.run_attempt}}
+        run: git tag v0.1.0-${{github.run_id}}${{github.run_number}}${{github.run_attempt}}-a -m "build number ${{github.run_number}}" 
 
   # Deploy job
   deploy:
